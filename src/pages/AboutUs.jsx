@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import aboutImg from '../assets/image_12.png'
 
@@ -25,13 +25,19 @@ const AboutUs = () => {
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-[60px]">
-            {['About', 'Impact', 'Our Work', 'Contact'].map((link) => (
-              <button
-                key={link}
+            {[
+              { label: 'About', to: '/about' },
+              { label: 'Impact', to: '/impact' },
+              { label: 'Our Work', to: '/' },
+              { label: 'Contact', to: '/' },
+            ].map((link) => (
+              <Link
+                key={link.label}
+                to={link.to}
                 className="text-ngo-black text-[14px] font-semibold tracking-wide hover:text-ngo-yellow transition-colors cursor-pointer bg-transparent border-none"
               >
-                {link}
-              </button>
+                {link.label}
+              </Link>
             ))}
           </div>
 

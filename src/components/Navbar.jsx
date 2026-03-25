@@ -6,7 +6,7 @@ const Navbar = () => {
 
   const navLinks = [
     { label: 'About', path: '/about' },
-    { label: 'Impact', path: '#impact' },
+    { label: 'Impact', path: '/impact' },
     { label: 'Our Work', path: '#our-work' },
     { label: 'Contact', path: '#contact' },
   ]
