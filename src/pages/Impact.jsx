@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import impactImage from '../assets/image_13.png'
+import womanImage from '../assets/woman1.png'
 
 function Impact() {
   const navLinks = [
@@ -22,9 +23,8 @@ function Impact() {
               <Link
                 key={link.label}
                 to={link.to}
-                className={`text-[17px] transition-colors ${
-                  link.active ? 'font-extrabold text-ngo-black' : 'font-medium text-ngo-black/90 hover:text-ngo-black'
-                }`}
+                className={`text-[17px] transition-colors ${link.active ? 'font-extrabold text-ngo-black' : 'font-medium text-ngo-black/90 hover:text-ngo-black'
+                  }`}
               >
                 {link.label}
               </Link>
@@ -66,6 +66,44 @@ function Impact() {
                 clean water access and emergency nutrition to long-term education support, our impact is driven by
                 local partnerships and sustained action.
               </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="max-w-[1320px] mx-auto pt-20 md:pt-28 border-t border-ngo-black/10">
+          <div className="flex items-center gap-4 mb-8 md:mb-10 pt-12 md:pt-14">
+            <div className="h-[2px] w-12 bg-ngo-black/50" />
+           
+          </div>
+
+          <h2 className="text-[32px] sm:text-[40px] md:text-[48px] leading-[1.1] font-extrabold mb-4">
+            Impact Stories
+          </h2>
+          <p className="text-[16px] md:text-[18px] leading-relaxed text-ngo-black/75 mb-12 max-w-[700px]">
+            See how your support is transforming lives, building communities, and creating lasting change.
+          </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-14 items-center">
+            <div>
+              <h3 className="text-[32px] sm:text-[40px] md:text-[44px] leading-[1.15] font-extrabold mb-6 text-ngo-black">
+                Empowering Women Entrepreneurs
+              </h3>
+              <p className="text-[16px] md:text-[17px] leading-relaxed text-ngo-black/75 mb-6">
+                In many underserved communities, women face significant barriers when it comes to accessing financial resources, business education, and economic opportunities. Limited access to capital and lack of training often prevent them from turning their ideas into sustainable sources of income.
+              </p>
+              <p className="text-[16px] md:text-[17px] leading-relaxed text-ngo-black/75 mb-6">
+                Our initiative was designed to break these barriers by providing comprehensive support through skills training, mentorship, and financial assistance. We organized hands-on workshops covering business fundamentals such as budgeting, marketing, customer service, and product development. In addition, selected participants received small grants and continuous guidance to help them successfully launch and grow their businesses.
+              </p>
+              <p className="text-[16px] md:text-[17px] leading-relaxed text-ngo-black/75">
+                Beyond economic benefits, this program has helped women gain confidence, independence, and leadership skills, enabling them to actively contribute to their households and communities.
+              </p>
+            </div>
+
+            <div className="relative max-w-full">
+              <div className="absolute -right-3 -bottom-3 md:-right-5 md:-bottom-5 h-full w-full rounded-[8px] bg-black" />
+              <div className="relative overflow-hidden rounded-[8px] h-[400px] sm:h-[480px] md:h-[550px]">
+                <img src={womanImage} alt="Woman entrepreneur with colorful fabric" className="w-full h-full object-cover" />
+              </div>
             </div>
           </div>
         </section>
