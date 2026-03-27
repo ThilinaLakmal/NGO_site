@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Footer from '../components/Footer'
 import impactImage from '../assets/image_13.png'
 import womanImage from '../assets/woman1.png'
 import childImage from '../assets/child.png'
@@ -184,6 +185,8 @@ function Impact() {
           </div>
         </section>
       </main>
+
+      <Footer />
     </div>
   )
 }
