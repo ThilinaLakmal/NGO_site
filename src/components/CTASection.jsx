@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import ctaImg from '../assets/image_12.png'
 
 const CTASection = () => {
@@ -25,9 +26,9 @@ const CTASection = () => {
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <button className="bg-ngo-yellow text-ngo-black px-10 py-4 rounded font-bold text-[16px] tracking-wide uppercase hover:bg-yellow-500 transition-colors cursor-pointer border-none">
+          <Link to="/donation" className="bg-ngo-yellow text-ngo-black px-10 py-4 rounded font-bold text-[16px] tracking-wide uppercase hover:bg-yellow-500 transition-colors cursor-pointer border-none inline-block">
             Donate Now
-          </button>
+          </Link>
           <button className="bg-transparent text-white px-10 py-4 rounded font-bold text-[16px] tracking-wide uppercase border-2 border-white hover:bg-white hover:text-ngo-black transition-colors cursor-pointer">
             See How Donations Help
           </button>

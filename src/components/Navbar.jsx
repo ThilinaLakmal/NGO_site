@@ -7,8 +7,8 @@ const Navbar = () => {
   const navLinks = [
     { label: 'About', path: '/about' },
     { label: 'Impact', path: '/impact' },
-    { label: 'Our Work', path: '#our-work' },
-    { label: 'Contact', path: '#contact' },
+    { label: 'Our Work', path: '/our-work' },
+    { label: 'Contact', path: '/contact' },
   ]
 
   return (
@@ -44,9 +44,9 @@ const Navbar = () => {
         </div>
 
         {/* Donate Button */}
-        <button className="hidden md:block bg-ngo-yellow text-ngo-black px-10 py-3 rounded text-[16px] font-semibold tracking-wider hover:bg-yellow-500 transition-colors cursor-pointer border-none uppercase">
+        <Link to="/donation" className="hidden md:block bg-ngo-yellow text-ngo-black px-10 py-3 rounded text-[16px] font-semibold tracking-wider hover:bg-yellow-500 transition-colors cursor-pointer border-none uppercase">
           Donate
-        </button>
+        </Link>
 
         {/* Mobile Menu Toggle */}
         <button

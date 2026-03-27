@@ -33,9 +33,9 @@ function Impact() {
                 {link.label}
               </Link>
             ))}
-            <button className="bg-ngo-yellow text-ngo-black px-5 py-2 rounded-[4px] text-[14px] font-bold hover:bg-[#eab800] transition-colors">
+            <Link to="/donation" className="bg-ngo-yellow text-ngo-black px-5 py-2 rounded-[4px] text-[14px] font-bold hover:bg-[#eab800] transition-colors inline-block">
               Donate
-            </button>
+            </Link>
           </nav>
         </div>
       </header>

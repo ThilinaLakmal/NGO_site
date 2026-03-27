@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import heroImg from '../assets/image_1.png'
 
 const Hero = () => {
@@ -27,12 +28,15 @@ const Hero = () => {
 
         {/* BUTTONS */}
         <div className="mt-14 flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <button className="bg-ngo-yellow text-ngo-black px-12 py-4 rounded font-bold text-[16px] tracking-wide uppercase hover:bg-yellow-500 transition-colors cursor-pointer border-none">
+          <Link to="/donation" className="bg-ngo-yellow text-ngo-black px-12 py-4 rounded font-bold text-[16px] tracking-wide uppercase hover:bg-yellow-500 transition-colors cursor-pointer border-none inline-block text-center">
             Donate Now
-          </button>
-          <button className="bg-transparent text-white px-12 py-4 rounded font-bold text-[16px] tracking-wide uppercase border-2 border-white hover:bg-white hover:text-ngo-black transition-colors cursor-pointer">
+          </Link>
+          <Link
+            to="/learn-more"
+            className="bg-transparent text-white px-12 py-4 rounded font-bold text-[16px] tracking-wide uppercase border-2 border-white hover:bg-white hover:text-ngo-black transition-colors cursor-pointer inline-block text-center"
+          >
             Learn More
-          </button>
+          </Link>
         </div>
       </div>
     </section>
