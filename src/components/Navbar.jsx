@@ -79,9 +79,9 @@ const Navbar = () => {
               </a>
             )
           ))}
-          <button className="bg-ngo-yellow text-ngo-black px-8 py-2 rounded text-sm font-semibold tracking-wide hover:bg-yellow-500 transition-colors cursor-pointer border-none w-fit">
+          <Link to="/donation" className="bg-ngo-yellow text-ngo-black px-8 py-2 rounded text-sm font-semibold tracking-wide hover:bg-yellow-500 transition-colors cursor-pointer border-none w-fit">
             Donate
-          </button>
+          </Link>
         </div>
       )}
     </nav>

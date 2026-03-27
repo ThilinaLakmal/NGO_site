@@ -1,9 +1,9 @@
 import React from 'react'
-import img3 from '../assets/image_3.png'
-import img4 from '../assets/image_4.png'
-import img5 from '../assets/image_5.png'
-import img6 from '../assets/image_6.png'
-import img7 from '../assets/image_7.png'
+import img3 from '../assets/whatsapp5.png'
+import img4 from '../assets/whatsapp7.png'
+import img5 from '../assets/whatsapp6.png'
+import img6 from '../assets/whatsapp4.png'
+import img7 from '../assets/whatsapp8.png'
 
 const focusAreas = [
   {

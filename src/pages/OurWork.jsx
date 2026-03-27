@@ -7,7 +7,7 @@ function OurWork() {
     { label: 'About', to: '/about' },
     { label: 'Impact', to: '/impact' },
     { label: 'Our Work', to: '/our-work', active: true },
-    { label: 'Contact', to: '/' },
+    { label: 'Contact', to: '/contact' },
   ]
 
   return (

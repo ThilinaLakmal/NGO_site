@@ -28,8 +28,8 @@ const AboutUs = () => {
             {[
               { label: 'About', to: '/about' },
               { label: 'Impact', to: '/impact' },
-              { label: 'Our Work', to: '/' },
-              { label: 'Contact', to: '/' },
+              { label: 'Our Work', to: '/our-work' },
+              { label: 'Contact', to: '/contact' },
             ].map((link) => (
               <Link
                 key={link.label}

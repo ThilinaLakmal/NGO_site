@@ -1,5 +1,5 @@
 import React from 'react'
-import platformImg from '../assets/image_2.png'
+import platformImg from '../assets/whatsapp2.png'
 
 const Platform = () => {
   return (

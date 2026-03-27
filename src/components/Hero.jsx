@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import heroImg from '../assets/image_1.png'
+import heroImg from '../assets/whatsapp.png'
 
 const Hero = () => {
   return (

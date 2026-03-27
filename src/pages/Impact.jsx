@@ -10,8 +10,8 @@ function Impact() {
   const navLinks = [
     { label: 'About', to: '/about' },
     { label: 'Impact', to: '/impact', active: true },
-    { label: 'Our Work', to: '/' },
-    { label: 'Contact', to: '/' },
+    { label: 'Our Work', to: '/our-work' },
+    { label: 'Contact', to: '/contact' },
   ]
 
   return (
