@@ -1,8 +1,8 @@
 import React from 'react'
-import img8 from '../assets/image_8.png'
-import img9 from '../assets/image_9.png'
-import img10 from '../assets/image_10.png'
-import img11 from '../assets/image_11.png'
+import img8 from '../assets/whatsapp12.png'
+import img9 from '../assets/whatsapp10.png'
+import img10 from '../assets/whatsapp9.png'
+import img11 from '../assets/whatsapp11.png'
 
 const projects = [
   {
