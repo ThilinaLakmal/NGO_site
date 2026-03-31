@@ -1,14 +1,121 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import contactImage from '../assets/Rectangle 22.png'
+import { sendContactEmail, sendAdminNotification } from '../utils/emailService'
 
 function Contact() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    message: '',
+  })
+  const [isLoading, setIsLoading] = useState(false)
+  const [statusMessage, setStatusMessage] = useState({
+    type: '', // 'success' or 'error'
+    text: '',
+  })
+
   const navLinks = [
     { label: 'About', to: '/about' },
     { label: 'Impact', to: '/impact' },
     { label: 'Our Work', to: '/our-work' },
     { label: 'Contact', to: '/contact', active: true },
   ]
+
+  // Handle input change
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+    // Clear status message when user starts typing
+    setStatusMessage({ type: '', text: '' })
+  }
+
+  // Validate form data
+  const validateForm = () => {
+    if (!formData.firstName.trim()) {
+      setStatusMessage({ type: 'error', text: 'Please enter your first name' })
+      return false
+    }
+    if (!formData.lastName.trim()) {
+      setStatusMessage({ type: 'error', text: 'Please enter your last name' })
+      return false
+    }
+    if (!formData.email.trim()) {
+      setStatusMessage({ type: 'error', text: 'Please enter your email address' })
+      return false
+    }
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      setStatusMessage({ type: 'error', text: 'Please enter a valid email address' })
+      return false
+    }
+    if (!formData.message.trim()) {
+      setStatusMessage({ type: 'error', text: 'Please enter your message' })
+      return false
+    }
+    if (formData.message.trim().length < 10) {
+      setStatusMessage({ type: 'error', text: 'Message must be at least 10 characters long' })
+      return false
+    }
+    return true
+  }
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (!validateForm()) {
+      return
+    }
+
+    setIsLoading(true)
+    setStatusMessage({ type: '', text: '' })
+
+    try {
+      // Send email to user
+      await sendContactEmail(formData)
+
+      // Send admin notification (optional)
+      try {
+        await sendAdminNotification(formData)
+      } catch (adminError) {
+        console.warn('Admin notification failed, but user email was sent', adminError)
+      }
+
+      // Success message
+      setStatusMessage({
+        type: 'success',
+        text: 'Message sent successfully! We will get back to you soon.',
+      })
+
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        message: '',
+      })
+
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        setStatusMessage({ type: '', text: '' })
+      }, 5000)
+    } catch (error) {
+      console.error('Error sending message:', error)
+      setStatusMessage({
+        type: 'error',
+        text: 'Failed to send message. Please try again or contact us directly at hello@largerthari.com',
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-white text-ngo-black font-sans antialiased">
@@ -104,13 +211,29 @@ function Contact() {
 
             {/* Right - Contact Form */}
             <div className="mt-32 md:mt-40">
-              <form className="space-y-5">
+              <form className="space-y-5" onSubmit={handleSubmit}>
+                {/* Status Message */}
+                {statusMessage.text && (
+                  <div
+                    className={`p-4 rounded text-[14px] font-semibold ${
+                      statusMessage.type === 'success'
+                        ? 'bg-green-500/20 border border-green-500 text-green-100'
+                        : 'bg-red-500/20 border border-red-500 text-red-100'
+                    }`}
+                  >
+                    {statusMessage.text}
+                  </div>
+                )}
+
                 {/* First Name & Last Name */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="text-white text-[13px] font-bold tracking-wide mb-2 block">First Name</label>
                     <input
                       type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
                       placeholder="John"
                       className="w-full bg-transparent border border-white/40 rounded px-4 py-3 text-white text-[14px] placeholder-white/50 focus:outline-none focus:border-white transition-colors"
                     />
@@ -119,6 +242,9 @@ function Contact() {
                     <label className="text-white text-[13px] font-bold tracking-wide mb-2 block">Last Name</label>
                     <input
                       type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
                       placeholder="Thomsan"
                       className="w-full bg-transparent border border-white/40 rounded px-4 py-3 text-white text-[14px] placeholder-white/50 focus:outline-none focus:border-white transition-colors"
                     />
@@ -130,6 +256,9 @@ function Contact() {
                   <label className="text-white text-[13px] font-bold tracking-wide mb-2 block">Email Address</label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="John@gmail.com"
                     className="w-full bg-transparent border border-white/40 rounded px-4 py-3 text-white text-[14px] placeholder-white/50 focus:outline-none focus:border-white transition-colors"
                   />
@@ -139,6 +268,9 @@ function Contact() {
                 <div>
                   <label className="text-white text-[13px] font-bold tracking-wide mb-2 block">Message</label>
                   <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     placeholder="Type Message....."
                     rows="6"
                     className="w-full bg-transparent border border-white/40 rounded px-4 py-3 text-white text-[14px] placeholder-white/50 focus:outline-none focus:border-white transition-colors resize-none"
@@ -149,9 +281,14 @@ function Contact() {
                 <div className="flex justify-center pt-6">
                   <button
                     type="submit"
-                    className="bg-ngo-yellow text-ngo-black px-8 py-3 rounded font-bold text-[13px] tracking-widest hover:bg-yellow-500 transition-colors uppercase cursor-pointer border-none"
+                    disabled={isLoading}
+                    className={`px-8 py-3 rounded font-bold text-[13px] tracking-widest uppercase border-none transition-colors ${
+                      isLoading
+                        ? 'bg-yellow-600 text-gray-400 cursor-not-allowed'
+                        : 'bg-ngo-yellow text-ngo-black hover:bg-yellow-500 cursor-pointer'
+                    }`}
                   >
-                    send message
+                    {isLoading ? 'sending...' : 'send message'}
                   </button>
                 </div>
               </form>
