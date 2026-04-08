@@ -4,6 +4,19 @@ import img4 from '../assets/whatsapp7.png'
 import img5 from '../assets/whatsapp6.png'
 import img6 from '../assets/whatsapp4.png'
 import img7 from '../assets/whatsapp8.png'
+import img8 from '../assets/whatsapp13.jpg'
+import img9 from '../assets/whatsapp14.jpg'
+import img11 from '../assets/whatsapp16.JPG'
+import img13 from '../assets/whatsapp18.jpg'
+import img14 from '../assets/whatsapp15.jpeg'
+import img15 from '../assets/whatsapp17.jpeg'
+import img16 from '../assets/whatsapp19.jpeg'
+import img17 from '../assets/whatsapp20.jpeg'
+import img18 from '../assets/whatsapp21.jpeg'
+import img19 from '../assets/whatsapp22.JPG'
+import img20 from '../assets/whatsapp23.JPG'
+import img21 from '../assets/whatsapp24.jpeg'
+import img22 from '../assets/whatsapp25.jpeg'
 
 const focusAreas = [
   {
@@ -31,6 +44,71 @@ const focusAreas = [
     description: 'Providing emergency relief, food programs, and welfare assistance for vulnerable groups.',
     image: img7,
   },
+  {
+    title: 'Food Distribution',
+    description: 'Delivering essential food packages directly to families and individuals in need across communities.',
+    image: img8,
+  },
+  {
+    title: 'Religious & Cultural Support',
+    description: 'Honouring spiritual traditions by supporting religious communities and cultural ceremonies.',
+    image: img9,
+  },
+  {
+    title: 'Community Gatherings',
+    description: 'Bringing people together through organised community events and charitable outreach programs.',
+    image: img11,
+  },
+  {
+    title: 'Outreach Events',
+    description: 'Reaching vulnerable populations through structured outreach events and support drives.',
+    image: img13,
+  },
+  {
+    title: 'Tree Planting',
+    description: 'Engaging students and volunteers in tree planting drives to promote a greener environment.',
+    image: img14,
+  },
+  {
+    title: 'Reforestation Drive',
+    description: 'Planting trees across communities to restore ecosystems and combat climate change.',
+    image: img15,
+  },
+  {
+    title: 'Green Volunteering',
+    description: 'Encouraging individuals to take hands-on action in nurturing the natural environment.',
+    image: img16,
+  },
+  {
+    title: 'Community Gifting',
+    description: 'Distributing essential goods and care packages to families and community members in need.',
+    image: img17,
+  },
+  {
+    title: 'Plant Saplings Initiative',
+    description: 'Distributing plant saplings to promote eco-friendly practices among community members.',
+    image: img18,
+  },
+  {
+    title: 'Disaster Relief Planning',
+    description: 'Coordinating essential supplies and response efforts to support families affected by emergencies.',
+    image: img19,
+  },
+  {
+    title: 'Emergency Outreach',
+    description: 'Visiting impacted neighbourhoods to assess urgent needs and organise immediate community support.',
+    image: img20,
+  },
+  {
+    title: 'Sports Sponsorship',
+    description: 'Supporting young athletes and community sports initiatives with resources and visibility.',
+    image: img21,
+  },
+  {
+    title: 'Community Recognition',
+    description: 'Honouring service and partnership through meaningful community appreciation events.',
+    image: img22,
+  },
 ]
 
 const FocusAreas = () => {
@@ -47,75 +125,20 @@ const FocusAreas = () => {
             <div className="mt-8 text-ngo-black text-[20px]">🎯</div>
           </div>
 
-          {/* Card 1 - Elderly Care */}
-          <div className="relative rounded-[16px] overflow-hidden group cursor-pointer h-[280px]">
-            <img
-              src={focusAreas[0].image}
-              alt={focusAreas[0].title}
-              className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-            />
-            <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300"></div>
-            <div className="relative z-10 p-6 flex flex-col justify-end h-full">
-              <h3 className="text-ngo-yellow text-[20px] font-bold mb-2">{focusAreas[0].title}</h3>
-              <p className="text-white/90 text-[14px] leading-[1.6]">{focusAreas[0].description}</p>
+          {focusAreas.map((area) => (
+            <div key={area.title} className="relative rounded-[16px] overflow-hidden group cursor-pointer h-[280px]">
+              <img
+                src={area.image}
+                alt={area.title}
+                className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300"></div>
+              <div className="relative z-10 p-6 flex flex-col justify-end h-full">
+                <h3 className="text-ngo-yellow text-[20px] font-bold mb-2">{area.title}</h3>
+                <p className="text-white/90 text-[14px] leading-[1.6]">{area.description}</p>
+              </div>
             </div>
-          </div>
-
-          {/* Card 2 - Community Development */}
-          <div className="relative rounded-[16px] overflow-hidden group cursor-pointer h-[280px]">
-            <img
-              src={focusAreas[1].image}
-              alt={focusAreas[1].title}
-              className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-            />
-            <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300"></div>
-            <div className="relative z-10 p-6 flex flex-col justify-end h-full">
-              <h3 className="text-ngo-yellow text-[20px] font-bold mb-2">{focusAreas[1].title}</h3>
-              <p className="text-white/90 text-[14px] leading-[1.6]">{focusAreas[1].description}</p>
-            </div>
-          </div>
-
-          {/* Card 3 - Healthcare Support */}
-          <div className="relative rounded-[16px] overflow-hidden group cursor-pointer h-[280px]">
-            <img
-              src={focusAreas[2].image}
-              alt={focusAreas[2].title}
-              className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-            />
-            <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300"></div>
-            <div className="relative z-10 p-6 flex flex-col justify-end h-full">
-              <h3 className="text-ngo-yellow text-[20px] font-bold mb-2">{focusAreas[2].title}</h3>
-              <p className="text-white/90 text-[14px] leading-[1.6]">{focusAreas[2].description}</p>
-            </div>
-          </div>
-
-          {/* Card 4 - Environmental Protection */}
-          <div className="relative rounded-[16px] overflow-hidden group cursor-pointer h-[280px]">
-            <img
-              src={focusAreas[3].image}
-              alt={focusAreas[3].title}
-              className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-            />
-            <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300"></div>
-            <div className="relative z-10 p-6 flex flex-col justify-end h-full">
-              <h3 className="text-ngo-yellow text-[20px] font-bold mb-2">{focusAreas[3].title}</h3>
-              <p className="text-white/90 text-[14px] leading-[1.6]">{focusAreas[3].description}</p>
-            </div>
-          </div>
-
-          {/* Card 5 - Social Welfare */}
-          <div className="relative rounded-[16px] overflow-hidden group cursor-pointer h-[280px]">
-            <img
-              src={focusAreas[4].image}
-              alt={focusAreas[4].title}
-              className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-            />
-            <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300"></div>
-            <div className="relative z-10 p-6 flex flex-col justify-end h-full">
-              <h3 className="text-ngo-yellow text-[20px] font-bold mb-2">{focusAreas[4].title}</h3>
-              <p className="text-white/90 text-[14px] leading-[1.6]">{focusAreas[4].description}</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
