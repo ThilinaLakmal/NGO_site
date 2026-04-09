@@ -27,8 +27,8 @@ const focusAreas = [
     image: img3,
   },
   {
-    title: 'Community Development',
-    description: 'Empowering local communities through education, livelihood support, and infrastructure initiatives.',
+    title: 'Community Assistance',
+    description: 'Providing direct assistance and essential supplies to households through community outreach programs.',
     image: img4,
   },
   {
@@ -67,8 +67,8 @@ const focusAreas = [
     image: img13,
   },
   {
-    title: 'Tree Planting',
-    description: 'Engaging students and volunteers in tree planting drives to promote a greener environment.',
+    title: 'Relief Package Distribution',
+    description: 'Providing essential care packages to families through community support and direct assistance initiatives.',
     image: img14,
   },
   {
@@ -82,13 +82,13 @@ const focusAreas = [
     image: img16,
   },
   {
-    title: 'Community Gifting',
-    description: 'Distributing essential goods and care packages to families and community members in need.',
+    title: 'Plant Saplings Initiative',
+    description: 'Distributing plant saplings to promote eco-friendly practices among community members.',
     image: img17,
   },
   {
-    title: 'Plant Saplings Initiative',
-    description: 'Distributing plant saplings to promote eco-friendly practices among community members.',
+    title: 'Community Gifting',
+    description: 'Distributing essential goods and care packages to families and community members in need.',
     image: img18,
   },
   {
@@ -107,8 +107,8 @@ const focusAreas = [
     image: img21,
   },
   {
-    title: 'Microfinance Support',
-    description: 'Helping families improve livelihoods through targeted financial assistance and community partnerships.',
+    title: 'Religious Leaders Welfare',
+    description: 'Supporting monks and religious leaders with essential goods and welfare assistance through donation initiatives.',
     image: img23,
   },
   {
