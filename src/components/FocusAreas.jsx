@@ -16,7 +16,9 @@ import img18 from '../assets/whatsapp21.jpeg'
 import img19 from '../assets/whatsapp22.JPG'
 import img20 from '../assets/whatsapp23.JPG'
 import img21 from '../assets/whatsapp24.jpeg'
-import img22 from '../assets/whatsapp25.jpeg'
+import img23 from '../assets/whatsapp24.jpg'
+import img24 from '../assets/whatsapp26.jpeg'
+import img25 from '../assets/whatsapp27.JPG'
 
 const focusAreas = [
   {
@@ -105,9 +107,19 @@ const focusAreas = [
     image: img21,
   },
   {
-    title: 'Community Recognition',
-    description: 'Honouring service and partnership through meaningful community appreciation events.',
-    image: img22,
+    title: 'Microfinance Support',
+    description: 'Helping families improve livelihoods through targeted financial assistance and community partnerships.',
+    image: img23,
+  },
+  {
+    title: 'Eco Stewardship',
+    description: 'Encouraging hands-on environmental action through planting and long-term care of local green spaces.',
+    image: img24,
+  },
+  {
+    title: 'Religious Leaders Support Program',
+    description: 'Providing respectful assistance and essential support for religious leaders through community-led service efforts.',
+    image: img25,
   },
 ]
 
