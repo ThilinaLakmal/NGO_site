@@ -19,6 +19,9 @@ import img21 from '../assets/whatsapp24.jpeg'
 import img23 from '../assets/whatsapp24.jpg'
 import img24 from '../assets/whatsapp26.jpeg'
 import img25 from '../assets/whatsapp27.JPG'
+import img26 from '../assets/whatsapp31.jpeg'
+import img27 from '../assets/whatsapp32.jpeg'
+import img28 from '../assets/whatsapp33.jpeg'
 
 const focusAreas = [
   {
@@ -120,6 +123,21 @@ const focusAreas = [
     title: 'Religious Leaders Support Program',
     description: 'Providing respectful assistance and essential support for religious leaders through community-led service efforts.',
     image: img25,
+  },
+  {
+    title: 'Tree Planting Event',
+    description: 'Organising community tree planting events to restore greenery and promote environmental awareness.',
+    image: img26,
+  },
+  {
+    title: 'School Green Initiative',
+    description: 'Engaging school students in eco-friendly tree planting drives to cultivate a love for the environment.',
+    image: img27,
+  },
+  {
+    title: 'Sapling Distribution',
+    description: 'Distributing tree saplings to students and community members to inspire a new generation of environmental stewards.',
+    image: img28,
   },
 ]
 
