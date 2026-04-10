@@ -56,7 +56,7 @@ function OurWork() {
                 We are working cross country
               </h1>
               <p className="text-black/70 text-[15px] leading-[1.8] max-w-[500px]">
-                Our work spans communities across borders, bringing vital resources, education, and healthcare to those who need it most. From rural villages to urban neighborhoods, we partner with local organizations to create lasting change — empowering families, protecting the vulnerable, and building a foundation for a brighter future.
+                We operate across multiple regions, delivering food aid, clean water, education support, and emergency relief to families facing hardship. Our teams work directly within communities — listening, responding, and building long-term programs that create real, measurable change in people's lives.
               </p>
             </div>
 
@@ -89,7 +89,7 @@ function OurWork() {
                 <div>
                   <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Elderly Care</h3>
                   <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
-                    Providing care, shelter, and medical assistance to senior citizens in need.
+                    We support elderly individuals by providing nutritious meals, regular health check-ups, and companionship programs to ensure they live with dignity and comfort.
                   </p>
                 </div>
               </div>
@@ -100,7 +100,7 @@ function OurWork() {
                 <div>
                   <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Healthcare Support</h3>
                   <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
-                    Delivering essential medical services to underserved communities.
+                    Our mobile health clinics and medical camps bring free consultations, medicines, and screenings directly to communities with limited access to hospitals and healthcare facilities.
                   </p>
                 </div>
               </div>
@@ -111,7 +111,7 @@ function OurWork() {
                 <div>
                   <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Environmental Protection</h3>
                   <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
-                    Promoting sustainability through conservation, eco friendly initiatives.
+                    We lead tree-planting drives, clean-up campaigns, and awareness programs that help communities adopt sustainable practices and protect the natural environment for future generations.
                   </p>
                 </div>
               </div>
@@ -125,7 +125,7 @@ function OurWork() {
                 <div>
                   <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Community Development</h3>
                   <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
-                    Empowering communities through education, infrastructure.
+                    We invest in building schools, community halls, and clean water systems while running skill-development workshops that enable individuals to become self-sufficient and contribute to local growth.
                   </p>
                 </div>
               </div>
@@ -136,7 +136,7 @@ function OurWork() {
                 <div>
                   <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Social Welfare</h3>
                   <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
-                    Supporting vulnerable groups with food, relief, and essential services.
+                    We provide food packages, emergency relief kits, and social assistance to families affected by poverty, natural disasters, and conflict — ensuring no one is left behind in times of crisis.
                   </p>
                 </div>
               </div>

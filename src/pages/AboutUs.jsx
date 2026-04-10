@@ -99,7 +99,7 @@ const AboutUs = () => {
                 We make sure to provide inclusive care for children with special needs
               </h2>
               <p className="text-white/80 text-[14px] leading-[1.8]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros molestie tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+                Our mission is to ensure that every child, regardless of ability or background, receives the care, education, and support they deserve. We work with families, caregivers, and communities to provide specialized programs that nurture growth, independence, and a sense of belonging for children with special needs.
               </p>
             </div>
 
@@ -110,7 +110,7 @@ const AboutUs = () => {
                 Provide more inclusive care to children around the world
               </h2>
               <p className="text-white/80 text-[14px] leading-[1.8]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros molestie tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+                We envision a world where every child has access to compassionate, high-quality care — no matter where they live. By expanding our reach globally, we aim to partner with communities and organizations worldwide to build inclusive systems that protect, educate, and empower the next generation.
               </p>
             </div>
           </div>
