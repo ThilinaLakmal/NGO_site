@@ -37,9 +37,9 @@ function LearnMore() {
           </div>
 
           {/* Donate Button */}
-          <button className="hidden md:block bg-ngo-yellow text-ngo-black px-6 py-2 rounded text-[14px] font-bold tracking-wide hover:bg-yellow-500 transition-colors cursor-pointer border-none uppercase">
+          <Link to="/donation" className="hidden md:block bg-ngo-yellow text-ngo-black px-6 py-2 rounded text-[14px] font-bold tracking-wide hover:bg-yellow-500 transition-colors cursor-pointer uppercase">
             Donate
-          </button>
+          </Link>
         </div>
       </div>
 
