@@ -65,7 +65,7 @@ function LearnMore() {
               </h1>
 
               <p className="text-white/85 text-[15px] leading-[1.7] mb-10">
-                Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text over since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                Your generosity powers our programs — from feeding hungry families to funding education for children in underserved communities. Every donation, no matter the size, directly transforms lives and helps build a more compassionate world. Join us in making a lasting difference.
               </p>
 
               {/* Donate Now Button */}
@@ -99,7 +99,7 @@ function LearnMore() {
                 How you can contribute to caring for our kids
               </h2>
               <p className="text-ngo-black/75 text-[15px] leading-[1.8]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis vivorra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.
+                There are many meaningful ways to support the children in our care. You can make a one-time or recurring financial donation, volunteer your time and skills, sponsor a child's education, or organize a local fundraising event. Every contribution — big or small — goes directly toward providing food, shelter, healthcare, and education for kids who need it most.
               </p>
             </div>
 
@@ -133,10 +133,10 @@ function LearnMore() {
               {activeTab === 'overview' && (
                 <div className="space-y-4">
                   <p className="text-ngo-black/75 text-[15px] leading-[1.8]">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis vivorra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+                    Our programs are built around community-driven goals — addressing food insecurity, providing clean water access, supporting children's education, and delivering emergency relief. We partner with local leaders to ensure every effort reflects the real needs of the people we serve.
                   </p>
                   <p className="text-ngo-black/75 text-[15px] leading-[1.8]">
-                    Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.
+                    With your support, we can expand our reach, respond faster in crises, and create long-term programs that give families the stability and hope they deserve.
                   </p>
                 </div>
               )}
@@ -165,7 +165,7 @@ function LearnMore() {
             {/* Right Content */}
             <div>
               <p className="text-ngo-black/75 text-[15px] leading-[1.8]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis vivorra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Nunc ut sem vitae risus tristique posuere.
+                Every donation is allocated with full transparency. Funds go toward purchasing nutritious food supplies, maintaining care facilities, training community health workers, and running educational programs for children. We publish regular impact reports so you can see exactly how your contribution is being used and the difference it makes on the ground.
               </p>
             </div>
           </div>
