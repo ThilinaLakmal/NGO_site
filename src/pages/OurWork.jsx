@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
-import workImage from '../assets/unsplash_AEaTUnvneik.png'
+import workImage from '../assets/whatsapp18.jpg'
 
 function OurWork() {
   const navLinks = [
