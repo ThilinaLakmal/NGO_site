@@ -56,7 +56,7 @@ function OurWork() {
                 We are working cross country
               </h1>
               <p className="text-black/70 text-[15px] leading-[1.8] max-w-[500px]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros molestie tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+                Our work spans communities across borders, bringing vital resources, education, and healthcare to those who need it most. From rural villages to urban neighborhoods, we partner with local organizations to create lasting change — empowering families, protecting the vulnerable, and building a foundation for a brighter future.
               </p>
             </div>
 
