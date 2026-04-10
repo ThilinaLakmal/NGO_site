@@ -20,7 +20,7 @@ const AboutUs = () => {
         <div className="max-w-[1400px] mx-auto flex items-center justify-between px-6 md:px-24 py-6">
           {/* Logo */}
           <div className="flex items-center">
-            <span className="text-ngo-black text-[24px] font-extrabold tracking-widest">LOGO</span>
+            <Link to="/" className="text-ngo-black text-[24px] font-extrabold tracking-widest">LOGO</Link>
           </div>
 
           {/* Desktop Nav Links */}

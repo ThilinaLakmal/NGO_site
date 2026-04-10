@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Footer from '../components/Footer'
-import donationImage from '../assets/woman1.png'
+import donationImage from '../assets/whatsapp15.jpeg'
 
 function LearnMore() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -20,7 +20,7 @@ function LearnMore() {
         <div className="max-w-[1400px] mx-auto flex items-center justify-between px-6 md:px-24 py-6">
           {/* Logo */}
           <div className="flex items-center">
-            <span className="text-ngo-black text-[24px] font-extrabold tracking-widest">LOGO</span>
+            <Link to="/" className="text-ngo-black text-[24px] font-extrabold tracking-widest">LOGO</Link>
           </div>
 
           {/* Desktop Nav Links */}
