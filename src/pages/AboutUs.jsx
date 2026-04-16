@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
-import aboutImg from '../assets/image_12.png'
+import aboutImg from '../assets/whatsapp21.jpeg'
+import storyImg from '../assets/whatsapp11.png'
+import chosenImg from '../assets/whatsapp5.png'
 
 const AboutUs = () => {
   const supporters = [
@@ -20,7 +22,7 @@ const AboutUs = () => {
         <div className="max-w-[1400px] mx-auto flex items-center justify-between px-6 md:px-24 py-6">
           {/* Logo */}
           <div className="flex items-center">
-            <span className="text-ngo-black text-[24px] font-extrabold tracking-widest">LOGO</span>
+            <Link to="/" className="text-ngo-black text-[24px] font-extrabold tracking-widest">LOGO</Link>
           </div>
 
           {/* Desktop Nav Links */}
@@ -97,7 +99,7 @@ const AboutUs = () => {
                 We make sure to provide inclusive care for children with special needs
               </h2>
               <p className="text-white/80 text-[14px] leading-[1.8]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros molestie tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+                Our mission is to ensure that every child, regardless of ability or background, receives the care, education, and support they deserve. We work with families, caregivers, and communities to provide specialized programs that nurture growth, independence, and a sense of belonging for children with special needs.
               </p>
             </div>
 
@@ -108,7 +110,7 @@ const AboutUs = () => {
                 Provide more inclusive care to children around the world
               </h2>
               <p className="text-white/80 text-[14px] leading-[1.8]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros molestie tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+                We envision a world where every child has access to compassionate, high-quality care — no matter where they live. By expanding our reach globally, we aim to partner with communities and organizations worldwide to build inclusive systems that protect, educate, and empower the next generation.
               </p>
             </div>
           </div>
@@ -231,7 +233,7 @@ const AboutUs = () => {
           {/* Left - Image */}
           <div className="relative h-[400px] md:h-[500px] overflow-hidden">
             <img
-              src={aboutImg}
+              src={storyImg}
               alt="Our Story"
               className="w-full h-full object-cover"
             />
@@ -244,7 +246,7 @@ const AboutUs = () => {
                 Our Story
               </h2>
               <p className="text-white/80 text-[14px] md:text-[15px] leading-[1.8]">
-                Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text over since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                Founded with a deep commitment to serving those in need, our organization began as a small community effort to address food insecurity and lack of access to basic resources. Over the years, we have grown into a dedicated team of volunteers and professionals working together to uplift families and individuals across our region. Every initiative we undertake is driven by empathy, transparency, and the belief that collective action creates lasting change.
               </p>
             </div>
           </div>
@@ -259,7 +261,7 @@ const AboutUs = () => {
                 Why chosen us
               </h2>
               <p className="text-ngo-black/80 text-[14px] md:text-[15px] leading-[1.8]">
-                Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text over since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                We are chosen by communities and partners because of our unwavering dedication to transparency, accountability, and measurable impact. Every donation we receive is directed where it matters most. Our team works on the ground, building trust with the people we serve and ensuring that aid reaches the most vulnerable without delay.
               </p>
             </div>
           </div>
@@ -267,7 +269,7 @@ const AboutUs = () => {
           {/* Right - Image */}
           <div className="relative h-[400px] md:h-[500px] overflow-hidden">
             <img
-              src={aboutImg}
+              src={chosenImg}
               alt="Why Chosen Us"
               className="w-full h-full object-cover"
             />
