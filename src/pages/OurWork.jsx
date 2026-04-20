@@ -80,65 +80,81 @@ function OurWork() {
             We support and showcase initiatives across key social areas:
           </h2>
 
-          <div className="space-y-12">
-            {/* First Row - 3 Items */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {/* Elderly Care */}
-              <div className="flex items-start gap-4">
-                <div className="bg-ngo-black text-white px-3 py-3 rounded flex-shrink-0 text-[20px] h-fit">👴</div>
-                <div>
-                  <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Elderly Care</h3>
-                  <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
-                    We support elderly individuals by providing nutritious meals, regular health check-ups, and companionship programs to ensure they live with dignity and comfort.
-                  </p>
-                </div>
-              </div>
-
-              {/* Healthcare Support */}
-              <div className="flex items-start gap-4">
-                <div className="bg-ngo-black text-white px-3 py-3 rounded flex-shrink-0 text-[20px] h-fit">⚕️</div>
-                <div>
-                  <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Healthcare Support</h3>
-                  <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
-                    Our mobile health clinics and medical camps bring free consultations, medicines, and screenings directly to communities with limited access to hospitals and healthcare facilities.
-                  </p>
-                </div>
-              </div>
-
-              {/* Environmental Protection */}
-              <div className="flex items-start gap-4">
-                <div className="bg-ngo-black text-white px-3 py-3 rounded flex-shrink-0 text-[20px] h-fit">🌱</div>
-                <div>
-                  <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Environmental Protection</h3>
-                  <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
-                    We lead tree-planting drives, clean-up campaigns, and awareness programs that help communities adopt sustainable practices and protect the natural environment for future generations.
-                  </p>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {/* Financial */}
+            <div className="flex items-start gap-4">
+              <div className="bg-ngo-black text-white px-3 py-3 rounded flex-shrink-0 text-[20px] h-fit">💰</div>
+              <div>
+                <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Financial</h3>
+                <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
+                  We provide financial literacy programs and support to empower individuals and families toward economic stability and independence.
+                </p>
               </div>
             </div>
 
-            {/* Second Row - 2 Items Centered */}
-            <div className="flex flex-col md:flex-row justify-center gap-12 md:gap-24">
-              {/* Community Development */}
-              <div className="flex items-start gap-4 md:flex-1 md:max-w-sm">
-                <div className="bg-ngo-black text-white px-3 py-3 rounded flex-shrink-0 text-[20px] h-fit">🏘️</div>
-                <div>
-                  <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Community Development</h3>
-                  <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
-                    We invest in building schools, community halls, and clean water systems while running skill-development workshops that enable individuals to become self-sufficient and contribute to local growth.
-                  </p>
-                </div>
+            {/* Manufactural */}
+            <div className="flex items-start gap-4">
+              <div className="bg-ngo-black text-white px-3 py-3 rounded flex-shrink-0 text-[20px] h-fit">🏭</div>
+              <div>
+                <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Manufactural</h3>
+                <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
+                  Our initiatives help fund and develop local manufacturing projects, creating jobs and fostering sustainable community growth.
+                </p>
               </div>
+            </div>
 
-              {/* Social Welfare */}
-              <div className="flex items-start gap-4 md:flex-1 md:max-w-sm">
-                <div className="bg-ngo-black text-white px-3 py-3 rounded flex-shrink-0 text-[20px] h-fit">🤝</div>
-                <div>
-                  <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Social Welfare</h3>
-                  <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
-                    We provide food packages, emergency relief kits, and social assistance to families affected by poverty, natural disasters, and conflict — ensuring no one is left behind in times of crisis.
-                  </p>
-                </div>
+            {/* Trading */}
+            <div className="flex items-start gap-4">
+              <div className="bg-ngo-black text-white px-3 py-3 rounded flex-shrink-0 text-[20px] h-fit">📈</div>
+              <div>
+                <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Trading</h3>
+                <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
+                  We support fair trade practices and create opportunities for local artisans and producers to access broader markets.
+                </p>
+              </div>
+            </div>
+
+            {/* Insuarance */}
+            <div className="flex items-start gap-4">
+              <div className="bg-ngo-black text-white px-3 py-3 rounded flex-shrink-0 text-[20px] h-fit">🛡️</div>
+              <div>
+                <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Insuarance</h3>
+                <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
+                  We work to provide access to affordable insurance options, protecting vulnerable communities from unforeseen financial shocks.
+                </p>
+              </div>
+            </div>
+
+            {/* Agricultural */}
+            <div className="flex items-start gap-4">
+              <div className="bg-ngo-black text-white px-3 py-3 rounded flex-shrink-0 text-[20px] h-fit">🌾</div>
+              <div>
+                <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Agricultural</h3>
+                <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
+                  Our projects promote sustainable farming techniques and provide resources to small-scale farmers to improve food security.
+                </p>
+              </div>
+            </div>
+
+            {/* Housing */}
+            <div className="flex items-start gap-4">
+              <div className="bg-ngo-black text-white px-3 py-3 rounded flex-shrink-0 text-[20px] h-fit">🏠</div>
+              <div>
+                <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Housing</h3>
+                <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
+                  We are committed to building safe, affordable, and sustainable housing for families and individuals in need.
+                </p>
+              </div>
+            </div>
+
+            {/* Health and education */}
+            <div className="flex items-start gap-4">
+              <div className="bg-ngo-black text-white px-3 py-3 rounded flex-shrink-0 text-[20px] h-fit">❤️</div>
+              <div>
+                <h3 className="text-[18px] font-extrabold text-ngo-black mb-2">Health and Education</h3>
+                <p className="text-ngo-black/75 text-[14px] leading-[1.6]">
+                  We believe in the power of health and education to transform lives and build brighter futures for generations to come.
+                </p>
               </div>
             </div>
           </div>

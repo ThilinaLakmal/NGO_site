@@ -142,16 +142,15 @@ const AboutUs = () => {
             {/* Award 1 */}
             <div className="flex flex-col items-center text-center">
               <div className="relative mb-8">
-                <svg className="w-24 h-24 text-gray-800" viewBox="0 0 100 100" fill="none">
-                  {/* Laurel Wreath */}
-                  <path d="M30 60 Q20 50 25 40 Q30 30 40 35 Q50 25 60 35 Q70 30 75 40 Q80 50 70 60" fill="none" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M30 60 Q20 50 25 40 Q30 30 40 35 Q50 25 60 35 Q70 30 75 40 Q80 50 70 60" fill="none" stroke="currentColor" strokeWidth="2" transform="rotate(180 50 50)"/>
+                <svg className="w-24 h-24 text-gray-200" viewBox="0 0 100 100" fill="none">
+                  {/* Outer circle/wreath replacement */}
+                  <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" />
                 </svg>
-                {/* Star Badge */}
+                {/* Badge */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-ngo-yellow rounded-full w-12 h-12 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-gray-800" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  <div className="bg-ngo-yellow rounded-full w-14 h-14 flex items-center justify-center shadow-md">
+                    <svg className="w-7 h-7 text-ngo-black" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                     </svg>
                   </div>
                 </div>
@@ -164,16 +163,16 @@ const AboutUs = () => {
             {/* Award 2 */}
             <div className="flex flex-col items-center text-center">
               <div className="relative mb-8">
-                <svg className="w-24 h-24 text-gray-800" viewBox="0 0 100 100" fill="none">
-                  {/* Laurel Wreath */}
-                  <path d="M30 60 Q20 50 25 40 Q30 30 40 35 Q50 25 60 35 Q70 30 75 40 Q80 50 70 60" fill="none" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M30 60 Q20 50 25 40 Q30 30 40 35 Q50 25 60 35 Q70 30 75 40 Q80 50 70 60" fill="none" stroke="currentColor" strokeWidth="2" transform="rotate(180 50 50)"/>
+                <svg className="w-24 h-24 text-gray-200" viewBox="0 0 100 100" fill="none">
+                  {/* Outer circle/wreath replacement */}
+                  <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" />
                 </svg>
-                {/* Trophy Badge */}
+                {/* Badge */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-ngo-yellow rounded-full w-12 h-12 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-gray-800" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 2C6.9 2 6 2.9 6 4v2c0 1.1-.9 2-2 2s-2-.9-2-2V4C2 2.9 2.9 2 4 2h4zm8 0c1.1 0 2 .9 2 2v2c0 1.1.9 2 2 2s2-.9 2-2V4c0-1.1-.9-2-2-2h-4zM7 13c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v6c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2v-6zm2 0h6v6H9v-6z" />
+                  <div className="bg-ngo-yellow rounded-full w-14 h-14 flex items-center justify-center shadow-md">
+                    <svg className="w-7 h-7 text-ngo-black" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                      <circle cx="12" cy="8" r="7"></circle>
+                      <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
                     </svg>
                   </div>
                 </div>
@@ -186,15 +185,21 @@ const AboutUs = () => {
             {/* Award 3 */}
             <div className="flex flex-col items-center text-center">
               <div className="relative mb-8">
-                <svg className="w-24 h-24 text-gray-800" viewBox="0 0 100 100" fill="none">
-                  {/* Laurel Wreath */}
-                  <path d="M30 60 Q20 50 25 40 Q30 30 40 35 Q50 25 60 35 Q70 30 75 40 Q80 50 70 60" fill="none" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M30 60 Q20 50 25 40 Q30 30 40 35 Q50 25 60 35 Q70 30 75 40 Q80 50 70 60" fill="none" stroke="currentColor" strokeWidth="2" transform="rotate(180 50 50)"/>
+                <svg className="w-24 h-24 text-gray-200" viewBox="0 0 100 100" fill="none">
+                  {/* Outer circle/wreath replacement */}
+                  <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" />
                 </svg>
-                {/* Medal Badge */}
+                {/* Badge */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-ngo-yellow rounded-full w-12 h-12 flex items-center justify-center">
-                    <span className="text-gray-800 font-bold text-xl">🏅</span>
+                  <div className="bg-ngo-yellow rounded-full w-14 h-14 flex items-center justify-center shadow-md">
+                    <svg className="w-7 h-7 text-ngo-black" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                      <path d="M4 22h16"></path>
+                      <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                      <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -206,15 +211,20 @@ const AboutUs = () => {
             {/* Award 4 */}
             <div className="flex flex-col items-center text-center">
               <div className="relative mb-8">
-                <svg className="w-24 h-24 text-gray-800" viewBox="0 0 100 100" fill="none">
-                  {/* Laurel Wreath */}
-                  <path d="M30 60 Q20 50 25 40 Q30 30 40 35 Q50 25 60 35 Q70 30 75 40 Q80 50 70 60" fill="none" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M30 60 Q20 50 25 40 Q30 30 40 35 Q50 25 60 35 Q70 30 75 40 Q80 50 70 60" fill="none" stroke="currentColor" strokeWidth="2" transform="rotate(180 50 50)"/>
+                <svg className="w-24 h-24 text-gray-200" viewBox="0 0 100 100" fill="none">
+                  {/* Outer circle/wreath replacement */}
+                  <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" />
                 </svg>
-                {/* Medal Badge */}
+                {/* Badge */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-ngo-yellow rounded-full w-12 h-12 flex items-center justify-center">
-                    <span className="text-gray-800 font-bold text-xl">🏅</span>
+                  <div className="bg-ngo-yellow rounded-full w-14 h-14 flex items-center justify-center shadow-md">
+                    <svg className="w-7 h-7 text-ngo-black" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                      <path d="M12 15c-3.31 0-6-2.69-6-6V4h12v5c0 3.31-2.69 6-6 6Z"></path>
+                      <path d="M12 15v7"></path>
+                      <path d="M7 22h10"></path>
+                      <path d="M15.5 4H18a2 2 0 0 1 2 2v1.5a4.5 4.5 0 0 1-4.5 4.5H15.5"></path>
+                      <path d="M8.5 4H6a2 2 0 0 0-2 2v1.5A4.5 4.5 0 0 0 8.5 12h0"></path>
+                    </svg>
                   </div>
                 </div>
               </div>

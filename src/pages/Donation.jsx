@@ -1,4 +1,7 @@
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { PAYPAL_CLIENT_ID } from '../config/paypalConfig'
+import { isValidAmount } from '../utils/donationHelper'
 import Footer from '../components/Footer'
 import image1 from '../assets/child1.png'
 import image2 from '../assets/unsplash_AEaTUnvneik.png'
@@ -8,6 +11,224 @@ import image5 from '../assets/uncle.png'
 import image6 from '../assets/woman.png'
 
 function Donation() {
+  const [selectedAmount, setSelectedAmount] = useState(10)
+  const [otherAmount, setOtherAmount] = useState('')
+  const [donationType, setDonationType] = useState('online')
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [message, setMessage] = useState('')
+  const [frequency, setFrequency] = useState('onetime')
+  const paypalContainerRef = useRef(null)
+
+  // Embedded Payment Form Fields
+  const [paymentForm, setPaymentForm] = useState({
+    email: '',
+    firstName: '',
+    lastName: '',
+    address: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    country: 'US',
+  })
+
+  const [lastDonation, setLastDonation] = useState(null)
+  const [showReceipt, setShowReceipt] = useState(false)
+  const [cardTypeSelection, setCardTypeSelection] = useState('')
+  const [paypalLoaded, setPaypalLoaded] = useState(false)
+
+  // Reset form state when component mounts and load PayPal SDK
+  useEffect(() => {
+    setSelectedAmount(10)
+    setOtherAmount('')
+    setDonationType('online')
+    setMessage('')
+    setFrequency('onetime')
+    setPaymentForm({
+      email: '',
+      firstName: '',
+      lastName: '',
+      address: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      country: 'US',
+    })
+    setLastDonation(null)
+    setShowReceipt(false)
+    setCardTypeSelection('')
+
+    // Load PayPal SDK
+    if (!window.paypal) {
+      const script = document.createElement('script')
+      script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD`
+      script.async = true
+      script.onload = () => {
+        setPaypalLoaded(true)
+      }
+      document.body.appendChild(script)
+    } else {
+      setPaypalLoaded(true)
+    }
+  }, [])
+
+  const amounts = [10, 20, 30, 40, 50]
+
+  // Initialize PayPal Buttons when SDK is loaded and donation type is online
+  useEffect(() => {
+    if (!paypalLoaded || donationType !== 'online' || !paypalContainerRef.current || showReceipt) return
+
+    // Validate form before rendering buttons
+    const amount = getFinalAmount()
+    const isFormValid = paymentForm.email && paymentForm.firstName && paymentForm.lastName && amount > 0
+
+    if (!isFormValid) {
+      setMessage('Please fill in all required fields and select a valid amount')
+      return
+    }
+
+    // Clear previous buttons
+    if (paypalContainerRef.current) {
+      paypalContainerRef.current.innerHTML = ''
+    }
+
+    // Render PayPal Buttons
+    window.paypal.Buttons({
+      createOrder: (data, actions) => {
+        const amount = getFinalAmount()
+
+        // Validate amount
+        if (!isValidAmount(amount)) {
+          setMessage('Invalid donation amount. Please enter an amount between $1 and $999,999.99')
+          throw new Error('Invalid amount')
+        }
+
+        // Create order with dynamic amount
+        return actions.order.create({
+          intent: 'CAPTURE',
+          purchase_units: [
+            {
+              amount: {
+                value: amount.toString(),
+                currency_code: 'USD',
+              },
+              description: `NGO Donation - ${frequency === 'monthly' ? 'Monthly' : frequency === 'quarterly' ? 'Quarterly' : frequency === 'yearly' ? 'Yearly' : 'One-Time'}${cardTypeSelection ? ` (${cardTypeSelection.toUpperCase()})` : ''}`,
+              custom_id: `donation_${cardTypeSelection || 'none'}_${Date.now()}`,
+            },
+          ],
+          application_context: {
+            brand_name: 'NGO Organization',
+            landing_page: 'BILLING',
+            user_action: 'PAY_NOW',
+          },
+        })
+      },
+
+      onApprove: async (data, actions) => {
+        setIsProcessing(true)
+        setMessage('')
+
+        try {
+          // Capture the order
+          const order = await actions.order.capture()
+
+          // Order captured successfully
+          const amount = getFinalAmount()
+          const donationRecord = {
+            id: order.id || Date.now(),
+            type: 'paypal',
+            amount: amount,
+            frequency: frequency,
+            preferredCardType: cardTypeSelection,
+            donorEmail: paymentForm.email,
+            donorName: `${paymentForm.firstName} ${paymentForm.lastName}`,
+            donorAddress: paymentForm.address,
+            donorCity: paymentForm.city,
+            donorState: paymentForm.state,
+            donorZipCode: paymentForm.zipCode,
+            donorCountry: paymentForm.country,
+            timestamp: new Date().toISOString(),
+            status: 'completed', // Mark as completed after successful capture
+            paypalOrderId: order.id,
+            paypalStatus: order.status,
+          }
+
+          // Update donation status in localStorage
+          const donations = JSON.parse(localStorage.getItem('donations') || '[]')
+          const donationIndex = donations.findIndex(d => d.id === donationRecord.id)
+          
+          if (donationIndex !== -1) {
+            donations[donationIndex] = donationRecord
+          } else {
+            donations.push(donationRecord)
+          }
+          
+          localStorage.setItem('donations', JSON.stringify(donations))
+
+          // Hide PayPal buttons
+          if (paypalContainerRef.current) {
+            paypalContainerRef.current.style.display = 'none'
+          }
+
+          // Show success message and receipt
+          setLastDonation(donationRecord)
+          setShowReceipt(true)
+          setMessage(`✓ Thank you for your generous donation of $${amount.toFixed(2)}! Your receipt has been generated.`)
+          setIsProcessing(false)
+
+          // Reset form after success
+          setTimeout(() => {
+            setPaymentForm({
+              email: '',
+              firstName: '',
+              lastName: '',
+              address: '',
+              city: '',
+              state: '',
+              zipCode: '',
+              country: 'US',
+            })
+            setOtherAmount('')
+            setSelectedAmount(10)
+            setCardTypeSelection('')
+            setFrequency('onetime')
+          }, 2000)
+        } catch (error) {
+          setMessage(`❌ Payment capture failed: ${error.message}. Please try again or contact support.`)
+          console.error('PayPal Capture Error:', error)
+          setIsProcessing(false)
+        }
+      },
+
+      onCancel: () => {
+        setMessage('⚠️ You cancelled the donation. Your donation was not processed.')
+        setIsProcessing(false)
+      },
+
+      onError: (err) => {
+        setMessage(`❌ Payment error: ${err.message || 'An unexpected error occurred. Please try again.'}`)
+        console.error('PayPal Error:', err)
+        setIsProcessing(false)
+      },
+    }).render(paypalContainerRef.current)
+  }, [paypalLoaded, donationType, paymentForm, frequency, cardTypeSelection, otherAmount, selectedAmount, showReceipt])
+
+  const handleAmountClick = (amount) => {
+    setSelectedAmount(amount)
+    setOtherAmount('')
+  }
+
+  const getFinalAmount = () => {
+    return otherAmount ? parseFloat(otherAmount) : selectedAmount
+  }
+
+  const handlePaymentFormChange = (e) => {
+    const { name, value } = e.target
+    setPaymentForm(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
   const navLinks = [
     { label: 'About', to: '/about' },
     { label: 'Impact', to: '/impact' },
@@ -91,149 +312,288 @@ function Donation() {
       </section>
 
       {/* Donation Campaign Details Section */}
-      <section className="py-20 px-6 md:px-24 bg-white">
+      <section className="py-[100px] px-6 md:px-24 bg-white">
         <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[80px] items-stretch">
             {/* Left Content - About & Documents */}
-            <div className="md:col-span-2">
+            <div className="flex flex-col">
               <h2 className="text-[36px] md:text-[40px] font-extrabold text-ngo-black mb-8">
                 About
               </h2>
 
               <p className="text-ngo-black/75 text-[15px] leading-[1.8] mb-6">
-                Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique. Velit eius ab delectus temporibus.
+                Our organization is dedicated to creating sustainable and meaningful change across diverse sectors of society. We believe in a holistic approach to development, focusing on seven key pillars to empower communities and uplift lives. Through targeted initiatives, we provide crucial support in financial literacy, foster growth in local manufacturing, and promote fair trading practices to ensure economic vitality.
               </p>
 
               <p className="text-ngo-black/75 text-[15px] leading-[1.8] mb-12">
-                For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes, figures, images, and figure captions can all be styled.
+                We also work to secure the well-being of individuals by offering accessible insurance, advancing agricultural practices for food security, and ensuring safe and stable housing. At the core of our mission is an unwavering commitment to health and education, which we see as the fundamental building blocks for a prosperous and equitable future. Your contribution helps us continue this vital work, touching lives and building resilient communities one project at a time.
               </p>
 
-              {/* Documents Section */}
-              <div className="mb-12">
-                <h3 className="text-[18px] font-bold text-ngo-black mb-8">
-                  Documents
-                </h3>
-                <div className="grid grid-cols-3 gap-8">
-                  <div className="flex flex-col items-center">
-                    <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
-                      <svg className="w-10 h-10 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/>
-                      </svg>
-                    </div>
-                    <p className="text-[12px] font-semibold text-ngo-black/60">DOC</p>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
-                      <svg className="w-10 h-10 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/>
-                      </svg>
-                    </div>
-                    <p className="text-[12px] font-semibold text-ngo-black/60">DOC</p>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
-                      <svg className="w-10 h-10 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/>
-                      </svg>
-                    </div>
-                    <p className="text-[12px] font-semibold text-ngo-black/60">DOC</p>
-                  </div>
-                </div>
-              </div>
-
               <p className="text-ngo-black/75 text-[15px] leading-[1.8] mb-6">
-                Veniam quae. Nostrum facere repellendus minus quod aut aliquam neque reiciendis. Qui beatae vel magnam repudiandae ipsum repellat repudiandae. Voluptate at dolores ut dolor sint occaecati similique. Velit eius ab delectus temporibus.
+                Transparency and accountability are the cornerstones of our operations. We ensure that every donation is carefully allocated to projects that deliver the highest impact. We have clear strategic plans, financial reports, and project milestones, giving you full visibility into how we transform your generosity into tangible results.
               </p>
 
               <p className="text-ngo-black/75 text-[15px] leading-[1.8]">
-                For dynamic content, add a rich text field to any collection and then connect a rich text element to that field in the settings panel. Headings, paragraphs, block-quotes, figures, images, and figure captions can all be styled.
+                By partnering with us, you are not just making a donation; you are investing in a continuous cycle of positive change. Whether it is equipping a farmer with better tools, helping a small business thrive, or building a classroom for the next generation, your support creates a ripple effect of empowerment. Join us in our journey to build stronger, self-sustaining communities.
               </p>
             </div>
 
-            {/* Right Content - Donation Campaign Stats */}
-            <div className="bg-gray-50 rounded-lg p-8">
-              {/* Total Amount */}
-              <div className="mb-8">
-                <p className="text-[14px] font-semibold text-ngo-black/60 mb-2">Total Raised</p>
-                <h3 className="text-[48px] font-extrabold text-ngo-black">$24,000</h3>
-              </div>
-
-              {/* Progress Bar */}
-              <div className="mb-8">
-                <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-                  <div className="bg-ngo-yellow h-2 rounded-full w-3/5"></div>
+            {/* Right Content - Donation Form */}
+            <div className="bg-white border-[1.5px] border-black p-8 md:p-12 h-full flex flex-col rounded-lg">
+              {message && (
+                <div className={`p-4 rounded-md mb-6 text-[13px] font-bold ${
+                  message.includes('Error') || message.includes('failed') || message.includes('Please fill') || message.includes('Invalid') 
+                    ? 'bg-red-50 text-red-700 border border-red-200' 
+                    : 'bg-green-50 text-green-700 border border-green-200'
+                }`}>
+                  {message}
                 </div>
-                <div className="flex justify-between mb-4">
-                  <div>
-                    <p className="text-[12px] text-ngo-black/60 mb-1">Goal</p>
-                    <p className="text-[18px] font-bold text-ngo-black">$40,000</p>
+              )}
+
+              {!showReceipt ? (
+                <div className="space-y-6">
+                  <div className="mb-6 flex gap-4 border-b border-gray-200 pb-4">
+                    <button 
+                      onClick={() => setDonationType('online')}
+                      className={`flex-1 pb-4 text-sm font-bold tracking-wider uppercase transition-colors relative ${
+                        donationType === 'online' ? 'text-ngo-black' : 'text-gray-400 hover:text-gray-600'
+                      }`}
+                    >
+                      Online Payment
+                      {donationType === 'online' && <span className="absolute bottom-0 left-0 w-full h-0.5 bg-ngo-black"></span>}
+                    </button>
+                    <button 
+                      onClick={() => setDonationType('offline')}
+                      className={`flex-1 pb-4 text-sm font-bold tracking-wider uppercase transition-colors relative ${
+                        donationType === 'offline' ? 'text-ngo-black' : 'text-gray-400 hover:text-gray-600'
+                      }`}
+                    >
+                      Offline Payment
+                      {donationType === 'offline' && <span className="absolute bottom-0 left-0 w-full h-0.5 bg-ngo-black"></span>}
+                    </button>
                   </div>
-                  <div className="text-right">
-                    <p className="text-[12px] text-ngo-black/60 mb-1">Remaining</p>
-                    <p className="text-[18px] font-bold text-ngo-black">$16,000</p>
-                  </div>
-                </div>
-              </div>
 
-              {/* Days Left */}
-              <div className="flex items-center gap-2 mb-2">
-                <svg className="w-4 h-4 text-ngo-black" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
-                </svg>
-                <p className="text-[14px] font-bold text-ngo-black">12 days left</p>
-              </div>
-
-              {/* Contributors */}
-              <div className="flex items-center gap-1 mb-6">
-                <span className="text-[18px]">❤️</span>
-                <p className="text-[14px] font-bold text-ngo-black">12354 Contributors</p>
-              </div>
-
-              {/* Donate Button */}
-              <Link to="/payment" className="w-full bg-ngo-black text-white py-3 rounded-full font-bold text-center mb-4 hover:bg-ngo-black/80 transition-colors flex items-center justify-center gap-2">
-                <span>Donate</span>
-                <span>❤️</span>
-              </Link>
-
-              {/* Share Button */}
-              <button className="w-full border-2 border-ngo-black rounded-full py-3 font-bold hover:bg-gray-100 transition-colors flex items-center justify-center gap-2">
-                <svg className="w-5 h-5 text-ngo-black" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.15c.52.47 1.2.77 1.96.77 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.48 9.31 6.84 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.84 0 1.48-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
-                </svg>
-              </button>
-
-              {/* Recent Contributors */}
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <h4 className="text-[18px] font-bold text-ngo-black mb-6">
-                  Recent Contributors
-                </h4>
-
-                <div className="space-y-4">
                   <div>
-                    <p className="text-[14px] text-ngo-black/60 mb-1">anonymous</p>
-                    <div className="flex items-center gap-1">
-                      <span className="text-[16px]">❤️</span>
-                      <p className="text-[18px] font-bold text-ngo-black">20,000</p>
+                    <p className="text-[13px] font-bold mb-3 uppercase tracking-wider">Select Amount</p>
+                    <div className="grid grid-cols-3 gap-3">
+                      {amounts.map((amount) => (
+                        <button
+                          key={amount}
+                          onClick={() => handleAmountClick(amount)}
+                          className={`py-3 px-4 rounded font-bold transition-all duration-200 ${
+                            selectedAmount === amount && !otherAmount
+                              ? 'bg-ngo-yellow text-ngo-black border-2 border-ngo-yellow scale-105 shadow-sm'
+                              : 'bg-gray-50 border border-gray-200 text-gray-600 hover:border-ngo-yellow/50'
+                          }`}
+                        >
+                          ${amount}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="mt-4 relative">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold">$</span>
+                      <input 
+                        type="number" 
+                        min="1"
+                        placeholder="Other Amount" 
+                        value={otherAmount}
+                        onChange={(e) => {
+                          setOtherAmount(e.target.value)
+                          setSelectedAmount(null)
+                        }}
+                        className="w-full pl-8 pr-4 py-3 border border-gray-200 bg-gray-50 rounded focus:outline-none focus:bg-white focus:border-ngo-black transition-colors font-bold text-ngo-black"
+                      />
                     </div>
                   </div>
 
-                  <div>
-                    <p className="text-[14px] text-ngo-black/60 mb-1">Abdullah Contributed</p>
-                    <div className="flex items-center gap-1">
-                      <span className="text-[16px]">❤️</span>
-                      <p className="text-[18px] font-bold text-ngo-black">20,000</p>
-                    </div>
-                  </div>
+                  {donationType === 'online' ? (
+                    <>
+                      <div>
+                        <p className="text-[13px] font-bold text-ngo-black mb-3 uppercase tracking-wider">
+                          Donation Frequency
+                        </p>
+                        <div className="grid grid-cols-4 gap-2">
+                          {['onetime', 'monthly', 'quarterly', 'yearly'].map((freq) => (
+                            <button
+                              key={freq}
+                              onClick={() => setFrequency(freq)}
+                              className={`py-2 px-1 text-[11px] font-bold rounded uppercase tracking-wider transition-colors ${
+                                frequency === freq
+                                  ? 'bg-ngo-black text-white'
+                                  : 'bg-transparent text-ngo-black border border-ngo-black/20 hover:border-ngo-black'
+                              }`}
+                            >
+                              {freq.replace('onetime', 'One Time')}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
 
-                  <div>
-                    <p className="text-[14px] text-ngo-black/60 mb-1">Antony Contributed</p>
-                    <div className="flex items-center gap-1">
-                      <span className="text-[16px]">❤️</span>
-                      <p className="text-[18px] font-bold text-ngo-black">20,000</p>
+                      <div>
+                        <label className="block text-[13px] font-bold text-ngo-black mb-3 uppercase tracking-wider">
+                          Donor Information
+                        </label>
+                        <div className="grid grid-cols-2 gap-3 mb-3">
+                          <input
+                            type="text"
+                            name="firstName"
+                            value={paymentForm.firstName}
+                            onChange={handlePaymentFormChange}
+                            placeholder="First Name *"
+                            className="w-full px-3 py-2 border border-gray-300 bg-gray-50 focus:bg-white rounded text-ngo-black text-[13px] focus:outline-none focus:border-ngo-black"
+                            required
+                          />
+                          <input
+                            type="text"
+                            name="lastName"
+                            value={paymentForm.lastName}
+                            onChange={handlePaymentFormChange}
+                            placeholder="Last Name *"
+                            className="w-full px-3 py-2 border border-gray-300 bg-gray-50 focus:bg-white rounded text-ngo-black text-[13px] focus:outline-none focus:border-ngo-black"
+                            required
+                          />
+                        </div>
+                        <input
+                          type="email"
+                          name="email"
+                          value={paymentForm.email}
+                          onChange={handlePaymentFormChange}
+                          placeholder="Email Address *"
+                          className="w-full px-3 py-2 border border-gray-300 bg-gray-50 focus:bg-white rounded text-ngo-black text-[13px] focus:outline-none focus:border-ngo-black mb-3"
+                          required
+                        />
+                        <input
+                          type="text"
+                          name="address"
+                          value={paymentForm.address}
+                          onChange={handlePaymentFormChange}
+                          placeholder="Street Address"
+                          className="w-full px-3 py-2 border border-gray-300 bg-gray-50 focus:bg-white rounded text-ngo-black text-[13px] focus:outline-none focus:border-ngo-black mb-3"
+                        />
+                        <div className="grid grid-cols-2 gap-3 mb-3">
+                          <input
+                            type="text"
+                            name="city"
+                            value={paymentForm.city}
+                            onChange={handlePaymentFormChange}
+                            placeholder="City"
+                            className="w-full px-3 py-2 border border-gray-300 bg-gray-50 focus:bg-white rounded text-ngo-black text-[13px] focus:outline-none focus:border-ngo-black"
+                          />
+                          <input
+                            type="text"
+                            name="state"
+                            value={paymentForm.state}
+                            onChange={handlePaymentFormChange}
+                            placeholder="State / Province"
+                            className="w-full px-3 py-2 border border-gray-300 bg-gray-50 focus:bg-white rounded text-ngo-black text-[13px] focus:outline-none focus:border-ngo-black"
+                          />
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <input
+                            type="text"
+                            name="zipCode"
+                            value={paymentForm.zipCode}
+                            onChange={handlePaymentFormChange}
+                            placeholder="Zip / Postal Code"
+                            className="w-full px-3 py-2 border border-gray-300 bg-gray-50 focus:bg-white rounded text-ngo-black text-[13px] focus:outline-none focus:border-ngo-black"
+                          />
+                          <select
+                            name="country"
+                            value={paymentForm.country}
+                            onChange={handlePaymentFormChange}
+                            className="w-full px-3 py-2 border border-gray-300 bg-gray-50 focus:bg-white rounded text-ngo-black text-[13px] focus:outline-none focus:border-ngo-black"
+                          >
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="GB">United Kingdom</option>
+                            <option value="LK">Sri Lanka</option>
+                            <option value="OTHER">Other</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="bg-gray-50 p-4 rounded border border-gray-200 mb-6">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-[13px] font-semibold text-gray-600">Total Donation:</span>
+                          <span className="text-[18px] font-bold text-ngo-black">${getFinalAmount().toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between items-center mb-4">
+                          <span className="text-[13px] font-semibold text-gray-600">Frequency:</span>
+                          <span className="text-[13px] font-bold text-ngo-black capitalize">{frequency === 'onetime' ? 'One Time' : frequency}</span>
+                        </div>
+                        
+                        <div className="border-t border-gray-200 mt-4 pt-4">
+                          <div className="flex flex-col relative z-0 min-h-[150px]">
+                            {!paypalLoaded && (
+                              <div className="absolute inset-0 bg-gray-50/80 z-10 flex flex-col items-center justify-center rounded">
+                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-ngo-black mb-2"></div>
+                                <span className="text-[12px] font-medium text-gray-500">Loading secure payment portal...</span>
+                              </div>
+                            )}
+                            <div ref={paypalContainerRef} className="w-full"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-[11px] text-gray-500 text-center mt-4">
+                        Your payment is securely processed by PayPal. Your information is safe and encrypted.
+                      </p>
+                    </>
+                  ) : (
+                    <div className="pt-2 space-y-4">
+                      <div className="p-5 bg-gray-50 rounded border border-gray-200 border-l-4 border-l-ngo-yellow">
+                        <p className="text-[14px] font-bold text-ngo-black mb-4 uppercase tracking-wider">Bank Transfer Details</p>
+                        <div className="space-y-4 text-[13px] text-ngo-black">
+                          <div className="flex justify-between items-end border-b border-gray-200 pb-2">
+                            <span className="font-semibold text-gray-500">Bank Name</span> 
+                            <span className="font-bold">Global Trust Bank</span>
+                          </div>
+                          <div className="flex justify-between items-end border-b border-gray-200 pb-2">
+                            <span className="font-semibold text-gray-500">Account Name</span> 
+                            <span className="font-bold">NGO Hope Foundation</span>
+                          </div>
+                          <div className="flex justify-between items-end border-b border-gray-200 pb-2">
+                            <span className="font-semibold text-gray-500">Account No</span> 
+                            <span className="font-bold font-mono text-[14px] tracking-wider">1234 5678 9012</span>
+                          </div>
+                          <div className="flex justify-between items-end pb-2">
+                            <span className="font-semibold text-gray-500">SWIFT/BIC</span> 
+                            <span className="font-bold font-mono">GTBUS33</span>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-[12px] text-gray-500 text-center font-medium bg-gray-50 p-3 rounded border border-gray-200 mt-4">
+                        💡 Please include "<span className="font-bold">DONATION - [Your Name]</span>" in the transfer reference.
+                      </p>
                     </div>
-                  </div>
+                  )}
                 </div>
-              </div>
+              ) : (
+                <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center shadow-inner">
+                  <div className="w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                  </div>
+                  <h3 className="text-[18px] font-bold text-green-800 mb-1 tracking-wide uppercase">Donation Successful</h3>
+                  <p className="text-green-700 mb-6 font-medium text-[13px]">Thank you for your generous gift of ${lastDonation.amount.toFixed(2)}!</p>
+                  
+                  <div className="bg-white rounded p-4 border border-green-200 text-left space-y-2 mb-6 shadow-sm">
+                    <div className="flex justify-between text-[13px] border-b border-green-50 pb-2"><span className="text-gray-500 font-semibold">Donor:</span> <span className="font-bold text-ngo-black">{lastDonation.donorName}</span></div>
+                    <div className="flex justify-between text-[13px] border-b border-green-50 pb-2"><span className="text-gray-500 font-semibold">Email:</span> <span className="font-bold text-ngo-black">{lastDonation.donorEmail}</span></div>
+                    <div className="flex justify-between text-[13px] border-b border-green-50 pb-2"><span className="text-gray-500 font-semibold">Transaction ID:</span> <span className="font-mono font-bold text-[11px] text-ngo-black">{lastDonation.paypalOrderId}</span></div>
+                    <div className="flex justify-between text-[13px]"><span className="text-gray-500 font-semibold">Date:</span> <span className="font-bold text-ngo-black">{new Date(lastDonation.timestamp).toLocaleDateString()}</span></div>
+                  </div>
+                  
+                  <button 
+                    onClick={() => {
+                      setShowReceipt(false);
+                      setLastDonation(null);
+                      setMessage('');
+                    }}
+                    className="bg-ngo-black hover:bg-black text-white font-bold py-3 px-8 rounded transition-colors w-full uppercase tracking-wider text-[12px]"
+                  >
+                    Make Another Donation
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

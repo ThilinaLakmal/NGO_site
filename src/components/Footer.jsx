@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -23,37 +24,50 @@ const Footer = () => {
             <div className="grid grid-cols-3 gap-[60px] mb-12">
               {/* Column 1 */}
               <div className="flex flex-col gap-6">
-                {['About', 'Donate', 'Privacy Policy'].map((link) => (
-                  <button
-                    key={link}
-                    className="text-white text-[14px] hover:text-ngo-yellow transition-colors cursor-pointer bg-transparent border-none text-left font-medium"
+                {[
+                  { name: 'About', path: '/about' }, 
+                  { name: 'Donate', path: '/donation' }, 
+                  { name: 'Privacy Policy', path: '#' }
+                ].map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className="text-white text-[14px] hover:text-ngo-yellow transition-colors cursor-pointer bg-transparent border-none text-left font-medium no-underline"
                   >
-                    {link}
-                  </button>
+                    {link.name}
+                  </Link>
                 ))}
               </div>
 
               {/* Column 2 */}
               <div className="flex flex-col gap-6">
-                {['Impact', 'Projects'].map((link) => (
-                  <button
-                    key={link}
-                    className="text-white text-[14px] hover:text-ngo-yellow transition-colors cursor-pointer bg-transparent border-none text-left font-medium"
+                {[
+                  { name: 'Impact', path: '/impact' }, 
+                  { name: 'Our Work', path: '/our-work' }
+                ].map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className="text-white text-[14px] hover:text-ngo-yellow transition-colors cursor-pointer bg-transparent border-none text-left font-medium no-underline"
                   >
-                    {link}
-                  </button>
+                    {link.name}
+                  </Link>
                 ))}
               </div>
 
               {/* Column 3 */}
               <div className="flex flex-col gap-6">
-                {['Our Work', 'Contact Us'].map((link) => (
-                  <button
-                    key={link}
-                    className="text-white text-[14px] hover:text-ngo-yellow transition-colors cursor-pointer bg-transparent border-none text-left font-medium"
+                {[
+                  { name: 'Projects', path: '#' }, 
+                  { name: 'Contact Us', path: '/contact' }
+                ].map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className="text-white text-[14px] hover:text-ngo-yellow transition-colors cursor-pointer bg-transparent border-none text-left font-medium no-underline"
                   >
-                    {link}
-                  </button>
+                    {link.name}
+                  </Link>
                 ))}
               </div>
             </div>

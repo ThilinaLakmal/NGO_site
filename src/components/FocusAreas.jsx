@@ -1,11 +1,11 @@
 import React from 'react'
-import img3 from '../assets/whatsapp5.png'
-import img4 from '../assets/whatsapp7.png'
-import img5 from '../assets/whatsapp6.png'
-import img6 from '../assets/whatsapp4.png'
-import img7 from '../assets/whatsapp8.png'
-import img8 from '../assets/whatsapp13.jpg'
-import img9 from '../assets/whatsapp14.jpg'
+import img3 from '../assets/whatsapp7.jpg'
+import img4 from '../assets/whatsapp5.png'
+import img5 from '../assets/trading.png'
+import img6 from '../assets/insuarance.png'
+import img7 from '../assets/agricultural.jpg'
+import img8 from '../assets/housing.png'
+import img9 from '../assets/health.png'
 import img11 from '../assets/whatsapp16.JPG'
 import img13 from '../assets/whatsapp18.jpg'
 import img14 from '../assets/whatsapp15.jpeg'
@@ -25,119 +25,39 @@ import img28 from '../assets/whatsapp33.jpeg'
 
 const focusAreas = [
   {
-    title: 'Elderly Care',
-    description: 'Supporting programs that provide healthcare, shelter, and emotional care for elderly citizens who need assistance.',
+    title: 'Financial',
+    description: 'Supporting programs that provide financial assistance and economic empowerment to those in need.',
     image: img3,
   },
   {
-    title: 'Community Assistance',
-    description: 'Providing direct assistance and essential supplies to households through community outreach programs.',
+    title: 'Manufactural',
+    description: 'Fostering local manufacturing and job creation through targeted support and investment.',
     image: img4,
   },
   {
-    title: 'Healthcare Support',
-    description: 'Helping underprivileged individuals access essential medical care and life-saving treatments.',
+    title: 'Trading',
+    description: 'Promoting fair trade practices and supporting small businesses in local and global markets.',
     image: img5,
   },
   {
-    title: 'Environmental Protection',
-    description: 'Supporting initiatives that protect nature, promote sustainability, and preserve ecosystems.',
+    title: 'Insuarance',
+    description: 'Providing access to affordable insurance to protect vulnerable families from unexpected hardships.',
     image: img6,
   },
   {
-    title: 'Social Welfare',
-    description: 'Providing emergency relief, food programs, and welfare assistance for vulnerable groups.',
+    title: 'Agricultural',
+    description: 'Empowering farmers with sustainable agricultural practices and resources to ensure food security.',
     image: img7,
   },
   {
-    title: 'Food Distribution',
-    description: 'Delivering essential food packages directly to families and individuals in need across communities.',
+    title: 'Housing',
+    description: 'Building and providing safe, affordable housing for families and individuals in need of shelter.',
     image: img8,
   },
   {
-    title: 'Religious & Cultural Support',
-    description: 'Honouring spiritual traditions by supporting religious communities and cultural ceremonies.',
+    title: 'Health and education',
+    description: 'Ensuring access to quality healthcare and educational opportunities for all members of the community.',
     image: img9,
-  },
-  {
-    title: 'Community Gatherings',
-    description: 'Bringing people together through organised community events and charitable outreach programs.',
-    image: img11,
-  },
-  {
-    title: 'Outreach Events',
-    description: 'Reaching vulnerable populations through structured outreach events and support drives.',
-    image: img13,
-  },
-  {
-    title: 'Relief Package Distribution',
-    description: 'Providing essential care packages to families through community support and direct assistance initiatives.',
-    image: img14,
-  },
-  {
-    title: 'Reforestation Drive',
-    description: 'Planting trees across communities to restore ecosystems and combat climate change.',
-    image: img15,
-  },
-  {
-    title: 'Green Volunteering',
-    description: 'Encouraging individuals to take hands-on action in nurturing the natural environment.',
-    image: img16,
-  },
-  {
-    title: 'Plant Saplings Initiative',
-    description: 'Distributing plant saplings to promote eco-friendly practices among community members.',
-    image: img17,
-  },
-  {
-    title: 'Community Gifting',
-    description: 'Distributing essential goods and care packages to families and community members in need.',
-    image: img18,
-  },
-  {
-    title: 'Disaster Relief Planning',
-    description: 'Coordinating essential supplies and response efforts to support families affected by emergencies.',
-    image: img19,
-  },
-  {
-    title: 'Emergency Outreach',
-    description: 'Visiting impacted neighbourhoods to assess urgent needs and organise immediate community support.',
-    image: img20,
-  },
-  {
-    title: 'Sports Sponsorship',
-    description: 'Supporting young athletes and community sports initiatives with resources and visibility.',
-    image: img21,
-  },
-  {
-    title: 'Religious Leaders Welfare',
-    description: 'Supporting monks and religious leaders with essential goods and welfare assistance through donation initiatives.',
-    image: img23,
-  },
-  {
-    title: 'Eco Stewardship',
-    description: 'Encouraging hands-on environmental action through planting and long-term care of local green spaces.',
-    image: img24,
-  },
-  {
-    title: 'Religious Leaders Support Program',
-    description: 'Providing respectful assistance and essential support for religious leaders through community-led service efforts.',
-    image: img25,
-  },
-  {
-    title: 'Tree Planting Event',
-    description: 'Organising community tree planting events to restore greenery and promote environmental awareness.',
-    image: img26,
-  },
-  {
-    title: 'School Green Initiative',
-    description: 'Engaging school students in eco-friendly tree planting drives to cultivate a love for the environment.',
-    image: img27,
-  },
-  {
-    title: 'Sapling Distribution',
-    description: 'Distributing tree saplings to students and community members to inspire a new generation of environmental stewards.',
-    image: img28,
   },
 ]
 
@@ -146,7 +66,7 @@ const FocusAreas = () => {
     <section className="bg-white py-[80px] px-6 md:px-24">
       <div className="max-w-[1400px] mx-auto">
         {/* Cards Grid with Yellow Header Box */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Yellow Header Box */}
           <div className="bg-ngo-yellow rounded-[16px] p-12 flex flex-col justify-center md:row-span-1">
             <h2 className="text-[32px] md:text-[36px] font-extrabold text-ngo-black leading-tight">
