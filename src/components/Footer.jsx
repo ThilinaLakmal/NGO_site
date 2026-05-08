@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import logo from '../assets/monik_logo.svg?url'
 
 const Footer = () => {
   return (
@@ -9,8 +10,7 @@ const Footer = () => {
           {/* Left: Logo & Contact */}
           <div className="md:col-span-2">
             <div className="flex items-center mb-12">
-              <span className="text-white text-[24px] font-bold tracking-wider">LOGO</span>
-              <span className="text-ngo-yellow text-[24px] font-bold">.</span>
+              <img src={logo} alt="Monik logo" className="h-10 block object-contain" />
             </div>
             <div className="flex flex-col gap-3 text-white text-[13px] font-bold tracking-wide leading-[1.8]">
               <p>INFO@NGO-HOPE.ORG</p>

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import logo from '../assets/monik_logo.svg?url'
 import Footer from '../components/Footer'
 import impactImage from '../assets/image_13.png'
 import womanImage from '../assets/whatsapp20.jpeg'
@@ -18,8 +19,8 @@ function Impact() {
     <div className="min-h-screen bg-[#efefef] text-ngo-black font-sans antialiased">
       <header className="pt-10 px-6 md:px-14 lg:px-20">
         <div className="max-w-[1320px] mx-auto flex items-center justify-between">
-          <Link to="/" className="text-[30px] font-extrabold tracking-widest leading-none">
-            LOGO<span className="text-ngo-yellow">.</span>
+          <Link to="/" className="flex items-center leading-none">
+            <img src={logo} alt="Monik logo" className="h-10 md:h-12 block object-contain" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-10 lg:gap-12">

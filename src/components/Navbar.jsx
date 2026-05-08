@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import logo from '../assets/monik_logo.svg?url'
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -16,8 +17,7 @@ const Navbar = () => {
       <div className="max-w-[1512px] mx-auto flex items-center justify-between px-10 md:px-24">
         {/* Logo */}
         <Link to="/" className="flex items-center cursor-pointer">
-          <span className="text-white text-[32px] font-extrabold tracking-widest">LOGO</span>
-          <span className="text-ngo-yellow text-[32px] font-extrabold">.</span>
+          <img src={logo} alt="Monik logo" className="h-10 md:h-12 block object-contain" />
         </Link>
 
         {/* Desktop Nav Links */}
