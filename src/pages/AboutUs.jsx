@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import logo from '../assets/monik_logo.svg?url'
 import Footer from '../components/Footer'
 import aboutImg from '../assets/whatsapp21.jpeg'
 import storyImg from '../assets/whatsapp11.png'
@@ -22,7 +23,9 @@ const AboutUs = () => {
         <div className="max-w-[1400px] mx-auto flex items-center justify-between px-6 md:px-24 py-6">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="text-ngo-black text-[24px] font-extrabold tracking-widest">LOGO</Link>
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="Monik logo" className="h-8 md:h-10 block object-contain" />
+            </Link>
           </div>
 
           {/* Desktop Nav Links */}

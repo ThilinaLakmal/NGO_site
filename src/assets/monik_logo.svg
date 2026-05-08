@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" preserveAspectRatio="xMinYMid meet">
+  <defs>
+    <linearGradient id="g" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#E14B3B" />
+      <stop offset="100%" stop-color="#D83A2F" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="none" />
+  <!-- Red stylized 'M' mark -->
+  <g transform="translate(8,10)">
+    <path d="M0 80 L18 20 L36 80 L54 20 L72 80 L90 20 L108 80 L0 80 Z" fill="url(#g)"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="120" y="64" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="48" fill="#0B3B5B">ONIK</text>
+
+  <!-- Tagline -->
+  <text x="120" y="86" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#0B3B5B">GROUP OF COMPANIES</text>
+</svg>
